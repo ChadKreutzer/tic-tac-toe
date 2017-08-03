@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "Two player Tic Tac Toe game implemented in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChadKreutzer/tic-tac-toe.git"
+  },
+  "author": "Chad Kreutzer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChadKreutzer/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/ChadKreutzer/tic-tac-toe#readme",
+  "dependencies": {
+    "css-loader": "^0.28.4",
+    "style-loader": "^0.18.2"
+  }
+}
