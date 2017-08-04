@@ -18,6 +18,10 @@ export default class Game {
     activateBoard () {
         this.squares = document.querySelectorAll(".square");
         this.squares.forEach(square => square.addEventListener("click", handleSquareClick));
+        
+    }
+    
+    startGame () {
         this.game.addEventListener("click", handleTurn);
     }
     

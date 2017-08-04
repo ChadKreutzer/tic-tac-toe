@@ -77,6 +77,7 @@ const playGame = new __WEBPACK_IMPORTED_MODULE_0__script_js__["a" /* default */]
 
 playGame.render();
 playGame.activateBoard();
+playGame.startGame();
 
 
 
@@ -686,6 +687,10 @@ class Game {
     activateBoard () {
         this.squares = document.querySelectorAll(".square");
         this.squares.forEach(square => square.addEventListener("click", handleSquareClick));
+        
+    }
+    
+    startGame () {
         this.game.addEventListener("click", handleTurn);
     }
     
