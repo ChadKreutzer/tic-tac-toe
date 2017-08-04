@@ -33,14 +33,6 @@ export default class Game {
     }
 }
 
-function handleSquareClick () {
-    if (!this.innerHTML) {
-        this.innerHTML = piece.innerHTML;
-        [current, winner] = [winner, current];
-        piece.innerHTML = current;
-    }
-}
-
 function handleTurn () {
     const boardState = [...this.childNodes]
         .filter(n => n.className)
@@ -59,20 +51,6 @@ function handleConfirmation () {
     showDialog(false);
 }
 
-const drawCheck = arr => arr.every(n => n);
-
-const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === winner)).length;
-
-const endMessage = str => {
-    showPlayer(false);
-    message.innerHTML = str;
-    showDialog(true);
-};
-
-const showDialog = (bool) => (bool) ? newGame.classList.remove("hidden") : newGame.classList.add("hidden");
-
-const deactivateBoard = () => squares.forEach(square => square.removeEventListener("click", handleSquareClick));
-
 const resetGame = () => {    
     message.innerHTML = "";
     [current, winner] = ["X", "O"];
@@ -84,4 +62,26 @@ const resetGame = () => {
     showPlayer(true);
 };
 
+const deactivateBoard = () => squares.forEach(square => square.removeEventListener("click", handleSquareClick));
+
+function handleSquareClick () {
+    if (!this.innerHTML) {
+        this.innerHTML = piece.innerHTML;
+        [current, winner] = [winner, current];
+        piece.innerHTML = current;
+    }
+}
+
+const endMessage = str => {
+    showPlayer(false);
+    message.innerHTML = str;
+    showDialog(true);
+};
+
+const showDialog = (bool) => (bool) ? newGame.classList.remove("hidden") : newGame.classList.add("hidden");
+
 const showPlayer = (bool) => (bool) ? player.classList.remove("hidden") : player.classList.add("hidden");
+
+const drawCheck = arr => arr.every(n => n);
+
+const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === winner)).length;
