@@ -121,7 +121,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "#game {\n    display: grid;\n    grid-template-columns: repeat(3, 50px);\n    grid-auto-rows: 50px;\n}\n\n.square {\n    border: 1px solid red;\n}\n", ""]);
+exports.push([module.i, "#game {\n    display: grid;\n    grid-template-columns: repeat(3, 50px);\n    grid-auto-rows: 50px;\n}\n\n.square {\n    border: 1px solid red;\n}\n\n.hidden {\n    display: none;\n}", ""]);
 
 // exports
 
@@ -667,7 +667,8 @@ module.exports = function (css) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-let piece = document.getElementById("piece"),
+let [current, next] = ["X", "O"],
+    piece = document.getElementById("piece"),
     endGame = document.getElementById("end-game");
 
 const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -682,6 +683,7 @@ class Game {
     render () {
         const board = new Array(9).fill(`<div class="square"></div>`);
         this.game.innerHTML = board.join("\n");
+        piece.innerHTML = current;
     }
     
     activateBoard () {
@@ -699,7 +701,11 @@ class Game {
 
 
 function handleSquareClick () {
-    if (!this.innerHTML) this.innerHTML = piece.innerHTML;
+    if (!this.innerHTML) {
+        this.innerHTML = piece.innerHTML;
+        [current, next] = [next, current];
+        piece.innerHTML = current;
+    }
 }
 
 function handleTurn () {
@@ -708,24 +714,28 @@ function handleTurn () {
         .map(n => n = n.innerHTML);
     
     if (winCheck(boardState)) {
+        hideCurrentPlayer();
         endGame.innerHTML = `
-            ${piece.innerHTML} WON!
+            ${next} WON!
             
         `;
         document.querySelectorAll(".square").forEach(square =>
             square.removeEventListener("click", handleSquareClick));
     } else if (drawCheck(boardState)) {
+        hideCurrentPlayer();
         endGame.innerHTML = `
             Tie Game!
         `;
-    } else {
-        piece.innerHTML = (piece.innerHTML === "X") ? "O" : "X";
-    }
+    } 
 }
 
 const drawCheck = arr => arr.every(n => n);
 
-const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === piece.innerHTML)).length;
+const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === next)).length;
+
+//const endMessage
+
+const hideCurrentPlayer = () => document.getElementById("player").classList.toggle("hidden");
 
 /***/ })
 /******/ ]);
