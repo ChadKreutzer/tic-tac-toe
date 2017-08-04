@@ -668,11 +668,13 @@ module.exports = function (css) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-let [current, next] = ["X", "O"];
+let [current, winner] = ["X", "O"];
 
 const piece = document.getElementById("piece"),
       message = document.getElementById("message"),
-      buttons = document.getElementsByTagName("input");
+      input = document.getElementsByTagName("input"),
+      newGame = document.getElementById("new-game"),
+      player = document.getElementById("player");
 
 const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
@@ -687,7 +689,7 @@ class Game {
         const board = new Array(9).fill(`<div class="square"></div>`);
         this.game.innerHTML = board.join("\n");
         piece.innerHTML = current;
-        showPlayerMessage();
+        showPlayer(true);
     }
     
     activateBoard () {
@@ -700,7 +702,7 @@ class Game {
     }
     
     endGame () {
-        [...buttons].forEach(button => button.addEventListener("click", handleConfirmation));
+        [...input].forEach(button => button.addEventListener("click", handleConfirmation));
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Game;
@@ -709,7 +711,7 @@ class Game {
 function handleSquareClick () {
     if (!this.innerHTML) {
         this.innerHTML = piece.innerHTML;
-        [current, next] = [next, current];
+        [current, winner] = [winner, current];
         piece.innerHTML = current;
     }
 }
@@ -720,7 +722,7 @@ function handleTurn () {
         .map(n => n = n.innerHTML);
     
     if (winCheck(boardState)) {
-        endMessage(`${next} WON!`);
+        endMessage(`${winner} WON!`);
         deactivateBoard();
     } else if (drawCheck(boardState)) {
         endMessage(`Tie Game!`);
@@ -729,18 +731,20 @@ function handleTurn () {
 
 function handleConfirmation () {
     if (this.name === "yes") resetGame();
-    document.getElementById("new-game").classList.toggle("hidden");
+    toggleDialog();
 }
 
 const drawCheck = arr => arr.every(n => n);
 
-const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === next)).length;
+const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === winner)).length;
 
 const endMessage = str => {
-    hidePlayerMessage();
+    showPlayer(false);
     message.innerHTML = str;
-    document.getElementById("new-game").classList.toggle("hidden");
+    toggleDialog();
 };
+
+const toggleDialog = () => newGame.classList.toggle("hidden");
 
 const deactivateBoard = () => {
     const squares = document.querySelectorAll(".square");
@@ -749,18 +753,17 @@ const deactivateBoard = () => {
 
 const resetGame = () => {    
     message.innerHTML = "";
-    [current, next] = ["X", "O"];
+    [current, winner] = ["X", "O"];
     piece.innerHTML = current;
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
         square.innerHTML = "";
         square.addEventListener("click", handleSquareClick);
     });
-    showPlayerMessage();
+    showPlayer(true);
 };
 
-const hidePlayerMessage = () => document.getElementById("player").classList.add("hidden");
-const showPlayerMessage = () => document.getElementById("player").classList.remove("hidden");
+const showPlayer = (bool) => (bool) ? player.classList.remove("hidden") : player.classList.add("hidden");
 
 /***/ })
 /******/ ]);
