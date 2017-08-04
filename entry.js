@@ -1,11 +1,8 @@
-const game = document.getElementById("game");
+require("./style.css");
+import Game from "./script.js";
 
+const playGame = new Game();
 
-console.log(game);
+playGame.render();
+playGame.activateBoard();
 
-const buildBoard = () => {
-    const board = new Array(9).fill(`<div class="square" id="`);
-    game.innerHTML = board.map((c, i) => c = `${c}${i}">${i}</div>`).join("\n");
-};
-
-buildBoard();
