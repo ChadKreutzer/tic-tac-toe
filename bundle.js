@@ -78,7 +78,7 @@ const playGame = new __WEBPACK_IMPORTED_MODULE_0__script_js__["a" /* default */]
 playGame.render();
 playGame.activateBoard();
 playGame.startGame();
-//playGame.endGame();
+playGame.endGame();
 
 
 
@@ -668,9 +668,11 @@ module.exports = function (css) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-let [current, next] = ["X", "O"],
-    piece = document.getElementById("piece"),
-    message = document.getElementById("message");
+let [current, next] = ["X", "O"];
+
+const piece = document.getElementById("piece"),
+      message = document.getElementById("message"),
+      buttons = document.getElementsByTagName("input");
 
 const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
@@ -698,12 +700,7 @@ class Game {
     }
     
     endGame () {
-        // window.addEventListener("click", function (){
-        //     if(message.innerHTML) {
-        //         var timeout = window.setTimeout(resetGame(), 1000);
-        //         //window.clearTimeout(timeout);
-        //     }
-        // });
+        [...buttons].forEach(button => button.addEventListener("click", handleConfirmation));
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Game;
@@ -730,6 +727,11 @@ function handleTurn () {
     } 
 }
 
+function handleConfirmation () {
+    if (this.name === "yes") resetGame();
+    document.getElementById("new-game").classList.toggle("hidden");
+}
+
 const drawCheck = arr => arr.every(n => n);
 
 const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === next)).length;
@@ -737,7 +739,7 @@ const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === next)).length;
 const endMessage = str => {
     hidePlayerMessage();
     message.innerHTML = str;
-    //message.classList.add("game-over");
+    document.getElementById("new-game").classList.toggle("hidden");
 };
 
 const deactivateBoard = () => {
@@ -745,19 +747,17 @@ const deactivateBoard = () => {
     squares.forEach(square => square.removeEventListener("click", handleSquareClick));
 };
 
-// const resetGame = () => {
-//     if(window.confirm("play again?")) {
-//         message.innerHTML = "";
-//         [current, next] = ["X", "O"];
-//         piece.innerHTML = current;
-//         const squares = document.querySelectorAll(".square");
-//         squares.forEach(square => {
-//             square.innerHTML = "";
-//             square.addEventListener("click", handleSquareClick);
-//         });
-//         showPlayerMessage();
-//     }
-// };
+const resetGame = () => {    
+    message.innerHTML = "";
+    [current, next] = ["X", "O"];
+    piece.innerHTML = current;
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => {
+        square.innerHTML = "";
+        square.addEventListener("click", handleSquareClick);
+    });
+    showPlayerMessage();
+};
 
 const hidePlayerMessage = () => document.getElementById("player").classList.add("hidden");
 const showPlayerMessage = () => document.getElementById("player").classList.remove("hidden");

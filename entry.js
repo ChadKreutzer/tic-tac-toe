@@ -6,5 +6,5 @@ const playGame = new Game();
 playGame.render();
 playGame.activateBoard();
 playGame.startGame();
-//playGame.endGame();
+playGame.endGame();
 
