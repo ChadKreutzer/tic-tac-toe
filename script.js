@@ -39,7 +39,10 @@ function handleTurn () {
     if (winCheck(boardState)) {
         endGame.innerHTML = `
             ${piece.innerHTML} WON!
+            
         `;
+        document.querySelectorAll(".square").forEach(square =>
+            square.removeEventListener("click", handleSquareClick));
     } else if (drawCheck(boardState)) {
         endGame.innerHTML = `
             Tie Game!
