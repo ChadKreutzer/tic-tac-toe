@@ -60,75 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__script_js__ = __webpack_require__(6);
-__webpack_require__(1);
-
-
-const playGame = new __WEBPACK_IMPORTED_MODULE_0__script_js__["a" /* default */]();
-
-playGame.render();
-playGame.activateBoard();
-playGame.startGame();
-playGame.endGame();
-
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(2);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(4)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!./node_modules/css-loader/index.js!./style.css", function() {
-			var newContent = require("!!./node_modules/css-loader/index.js!./style.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "#game {\n    display: grid;\n    grid-template-columns: repeat(3, 50px);\n    grid-auto-rows: 50px;\n}\n\n.square {\n    border: 1px solid red;\n}\n\n.hidden {\n    display: none;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -210,7 +146,85 @@ function toComment(sourceMap) {
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__script_js__ = __webpack_require__(7);
+__webpack_require__(2);
+
+
+const playGame = new __WEBPACK_IMPORTED_MODULE_0__script_js__["a" /* default */]();
+
+playGame.render();
+playGame.activateBoard();
+playGame.startGame();
+playGame.endGame();
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(3);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(5)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./node_modules/css-loader/index.js!./style.css", function() {
+			var newContent = require("!!./node_modules/css-loader/index.js!./style.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+exports.i(__webpack_require__(4), "");
+
+// module
+exports.push([module.i, "#game {\n    display: grid;\n    grid-template-columns: repeat(3, 100px);\n    grid-auto-rows: 100px;\n}\n\n.square {\n    border: 1px solid red;\n    display: grid;\n    justify-items: center;\n    align-items: center;\n    font-size: auto;\n}\n\n.hidden {\n    display: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "html {\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n}\n\nbody {\n    margin: 0;\n    font: 16px/1 sans-serif;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-font-smoothing: antialiased;\n}\n\np,\nblockquote,\nfigure,\nol,\nul {\n    margin: 0;\n    padding: 0;\n}\n\nmain,\nli {\n    display: block;\n}\n\nh1,\nh2,\nh3,\nh4 {\n    margin: 0;\n    padding: 0;\n    font-size: inherit;\n}\n\nstrong {\n    font-weight: bold;\n}\n\na,\nbutton {\n    color: inherit;\n    transition: .3s;\n}\n\na {\n    text-decoration: none;\n}\n\nbutton {\n    overflow: visible;\n    border: 0;\n    font: inherit;\n    -webkit-font-smoothing: inherit;\n    letter-spacing: inherit;\n    background: none;\n    cursor: pointer;\n}\n\n::-moz-focus-inner {\n    padding: 0;\n    border: 0;\n}\n\n/*:focus {*/\n/*    outline: 0;*/\n/*}*/\n\nimg {\n    max-width: 100%;\n    height: auto;\n    border: 0;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -256,7 +270,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(5);
+var	fixUrls = __webpack_require__(6);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -569,7 +583,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 
@@ -664,66 +678,86 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-let [current, winner] = ["X", "O"],
-    squares;
+let squares, [current, winner] = ["X", "O"];
 
 const piece = document.getElementById("piece"),
-      message = document.getElementById("message"),
-      input = document.getElementsByTagName("input"),
-      newGame = document.getElementById("new-game"),
-      player = document.getElementById("player"),
-      game = document.getElementById("game");
+    message = document.getElementById("message"),
+    newGame = document.getElementById("new-game"),
+    player = document.getElementById("player"),
+    game = document.getElementById("game");
 
-const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const WINS = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
 
 class Game {
     
-    render () {
+    constructor () {
+        this.buttons = document.getElementsByTagName("input");
+    }
+
+    render() {
         const board = new Array(9).fill(`<div class="square"></div>`);
         game.innerHTML = board.join("\n");
         squares = document.querySelectorAll(".square");
         piece.innerHTML = current;
         showPlayer(true);
     }
-    
-    activateBoard () {
+
+    activateBoard() {
         squares.forEach(square => square.addEventListener("click", handleSquareClick));
     }
-    
-    startGame () {
+
+    startGame() {
         game.addEventListener("click", handleTurn);
     }
-    
-    endGame () {
-        [...input].forEach(button => button.addEventListener("click", handleConfirmation));
+
+    endGame() {
+        [...this.buttons].forEach(button => button.addEventListener("click", handleConfirmation));
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Game;
 
 
-function handleTurn () {
-    const boardState = [...this.childNodes]
-        .filter(n => n.className)
-        .map(n => n = n.innerHTML);
-    
-    if (winCheck(boardState)) {
-        endMessage(`${winner} WON!`);
-        deactivateBoard();
-    } else if (drawCheck(boardState)) {
-        endMessage(`Tie Game!`);
-    } 
-}
-
-function handleConfirmation () {
-    (this.name === "yes") ? resetGame() : game.removeEventListener("click", handleTurn);
+function handleConfirmation() {
+    (this.name === "yes") ? resetGame(): game.removeEventListener("click", handleTurn);
     showDialog(false);
 }
 
-const resetGame = () => {    
+function handleTurn() {
+    const boardState = [...this.childNodes]
+        .filter(n => n.className)
+        .map(n => n = n.innerHTML);
+
+    if (winCheck(boardState)) {
+        endMessage(`${winner} WON!`);
+        squares.forEach(square => square.removeEventListener("click", handleSquareClick));
+    }
+    else if (drawCheck(boardState)) {
+        endMessage(`Tie Game!`);
+    }
+}
+
+function handleSquareClick() {
+    if (!this.innerHTML) {
+        this.innerHTML = piece.innerHTML;
+        [current, winner] = [winner, current];
+        piece.innerHTML = current;
+    }
+}
+
+const resetGame = () => {
     message.innerHTML = "";
     [current, winner] = ["X", "O"];
     piece.innerHTML = current;
@@ -734,27 +768,17 @@ const resetGame = () => {
     showPlayer(true);
 };
 
-const deactivateBoard = () => squares.forEach(square => square.removeEventListener("click", handleSquareClick));
-
-function handleSquareClick () {
-    if (!this.innerHTML) {
-        this.innerHTML = piece.innerHTML;
-        [current, winner] = [winner, current];
-        piece.innerHTML = current;
-    }
-}
-
 const endMessage = str => {
     showPlayer(false);
     message.innerHTML = str;
     showDialog(true);
 };
 
+const drawCheck = arr => arr.every(n => n);
+
 const showDialog = (bool) => (bool) ? newGame.classList.remove("hidden") : newGame.classList.add("hidden");
 
 const showPlayer = (bool) => (bool) ? player.classList.remove("hidden") : player.classList.add("hidden");
-
-const drawCheck = arr => arr.every(n => n);
 
 const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === winner)).length;
 
