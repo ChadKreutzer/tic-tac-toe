@@ -147,31 +147,181 @@ function toComment(sourceMap) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__script_js__ = __webpack_require__(7);
-__webpack_require__(2);
 
 
-const playGame = new __WEBPACK_IMPORTED_MODULE_0__script_js__["a" /* default */]();
+var _script = __webpack_require__(2);
+
+var _script2 = _interopRequireDefault(_script);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+__webpack_require__(3);
+
+
+var playGame = new _script2.default();
 
 playGame.render();
 playGame.activateBoard();
 playGame.startGame();
 playGame.endGame();
 
-
-
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var squares = void 0,
+    current = "X",
+    winner = "O";
+
+var piece = document.getElementById("piece");
+var message = document.getElementById("message");
+var newGame = document.getElementById("new-game");
+var player = document.getElementById("player");
+var game = document.getElementById("game");
+
+var WINS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+
+var Game = function () {
+    function Game() {
+        _classCallCheck(this, Game);
+
+        this.buttons = document.getElementsByTagName("input");
+    }
+
+    _createClass(Game, [{
+        key: "render",
+        value: function render() {
+            var board = new Array(9).fill("<div class=\"square\"></div>");
+            game.innerHTML = board.join("\n");
+            squares = document.querySelectorAll(".square");
+            piece.innerHTML = current;
+            showPlayer(true);
+        }
+    }, {
+        key: "activateBoard",
+        value: function activateBoard() {
+            squares.forEach(function (square) {
+                return square.addEventListener("click", handleSquareClick);
+            });
+        }
+    }, {
+        key: "startGame",
+        value: function startGame() {
+            game.addEventListener("click", handleTurn);
+        }
+    }, {
+        key: "endGame",
+        value: function endGame() {
+            [].concat(_toConsumableArray(this.buttons)).forEach(function (button) {
+                return button.addEventListener("click", handleConfirmation);
+            });
+        }
+    }]);
+
+    return Game;
+}();
+
+exports.default = Game;
+
+
+function handleConfirmation() {
+    this.name === "yes" ? resetGame() : game.removeEventListener("click", handleTurn);
+    showDialog(false);
+}
+
+function handleTurn() {
+    var boardState = [].concat(_toConsumableArray(this.childNodes)).filter(function (n) {
+        return n.className;
+    }).map(function (n) {
+        return n = n.innerHTML;
+    });
+
+    if (winCheck(boardState)) {
+        endMessage(winner + " WON!");
+        squares.forEach(function (square) {
+            return square.removeEventListener("click", handleSquareClick);
+        });
+    } else if (drawCheck(boardState)) {
+        endMessage("Tie Game!");
+    }
+}
+
+function handleSquareClick() {
+    if (!this.innerHTML) {
+        this.innerHTML = piece.innerHTML;
+        var _ref = [winner, current];
+        current = _ref[0];
+        winner = _ref[1];
+
+        piece.innerHTML = current;
+    }
+}
+
+var resetGame = function resetGame() {
+    message.innerHTML = "";
+    current = "X";
+    winner = "O";
+
+    piece.innerHTML = current;
+    squares.forEach(function (square) {
+        square.innerHTML = "";
+        square.addEventListener("click", handleSquareClick);
+    });
+    showPlayer(true);
+};
+
+var endMessage = function endMessage(str) {
+    showPlayer(false);
+    message.innerHTML = str;
+    showDialog(true);
+};
+
+var drawCheck = function drawCheck(arr) {
+    return arr.every(function (n) {
+        return n;
+    });
+};
+
+var showDialog = function showDialog(bool) {
+    return bool ? newGame.classList.remove("hidden") : newGame.classList.add("hidden");
+};
+
+var showPlayer = function showPlayer(bool) {
+    return bool ? player.classList.remove("hidden") : player.classList.add("hidden");
+};
+
+var winCheck = function winCheck(arr) {
+    return WINS.filter(function (w) {
+        return w.every(function (c) {
+            return arr[c] === winner;
+        });
+    }).length;
+};
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(3);
+var content = __webpack_require__(4);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -179,7 +329,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(5)(content, options);
+var update = __webpack_require__(6)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -196,12 +346,12 @@ if(false) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
 // imports
-exports.i(__webpack_require__(4), "");
+exports.i(__webpack_require__(5), "");
 
 // module
 exports.push([module.i, "#game {\n    display: grid;\n    grid-template-columns: repeat(3, 100px);\n    grid-auto-rows: 100px;\n}\n\n.square {\n    border: 1px solid red;\n    display: grid;\n    justify-items: center;\n    align-items: center;\n    font-size: auto;\n}\n\n.hidden {\n    display: none;\n}\n", ""]);
@@ -210,7 +360,7 @@ exports.push([module.i, "#game {\n    display: grid;\n    grid-template-columns:
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -224,7 +374,7 @@ exports.push([module.i, "html {\n    -ms-text-size-adjust: 100%;\n    -webkit-te
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -270,7 +420,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(6);
+var	fixUrls = __webpack_require__(7);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -583,7 +733,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 
@@ -675,105 +825,6 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-let squares, [current, winner] = ["X", "O"];
-
-const piece = document.getElementById("piece"),
-    message = document.getElementById("message"),
-    newGame = document.getElementById("new-game"),
-    player = document.getElementById("player"),
-    game = document.getElementById("game");
-
-const WINS = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
-];
-
-class Game {
-    
-    constructor () {
-        this.buttons = document.getElementsByTagName("input");
-    }
-
-    render() {
-        const board = new Array(9).fill(`<div class="square"></div>`);
-        game.innerHTML = board.join("\n");
-        squares = document.querySelectorAll(".square");
-        piece.innerHTML = current;
-        showPlayer(true);
-    }
-
-    activateBoard() {
-        squares.forEach(square => square.addEventListener("click", handleSquareClick));
-    }
-
-    startGame() {
-        game.addEventListener("click", handleTurn);
-    }
-
-    endGame() {
-        [...this.buttons].forEach(button => button.addEventListener("click", handleConfirmation));
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Game;
-
-
-function handleConfirmation() {
-    (this.name === "yes") ? resetGame(): game.removeEventListener("click", handleTurn);
-    showDialog(false);
-}
-
-function handleTurn() {
-    const boardState = [...this.childNodes]
-        .filter(n => n.className)
-        .map(n => n = n.innerHTML);
-
-    if (winCheck(boardState)) {
-        endMessage(`${winner} WON!`);
-        squares.forEach(square => square.removeEventListener("click", handleSquareClick));
-    }
-    else if (drawCheck(boardState)) {
-        endMessage(`Tie Game!`);
-    }
-}
-
-function handleSquareClick() {
-    if (!this.innerHTML) {
-        this.innerHTML = piece.innerHTML;
-        [current, winner] = [winner, current];
-        piece.innerHTML = current;
-    }
-}
-
-const resetGame = () => {
-    message.innerHTML = "";
-    [current, winner] = ["X", "O"];
-    piece.innerHTML = current;
-    squares.forEach(square => {
-        square.innerHTML = "";
-        square.addEventListener("click", handleSquareClick);
-    });
-    showPlayer(true);
-};
-
-const endMessage = str => {
-    showPlayer(false);
-    message.innerHTML = str;
-    showDialog(true);
-};
-
-const drawCheck = arr => arr.every(n => n);
-
-const showDialog = (bool) => (bool) ? newGame.classList.remove("hidden") : newGame.classList.add("hidden");
-
-const showPlayer = (bool) => (bool) ? player.classList.remove("hidden") : player.classList.add("hidden");
-
-const winCheck = arr => WINS.filter(w => w.every(c => arr[c] === winner)).length;
 
 
 /***/ })
